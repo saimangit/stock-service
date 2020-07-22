@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="stock-service/.mvn/wrapper"/>
+	<classpathentry kind="src" path="stock-service/src/main/java"/>
+	<classpathentry excluding="com/example/demo/" kind="src" path="stock-service/src/test/java"/>
+	<classpathentry kind="src" path="stock-service/src/test/java/com/example/demo"/>
+	<classpathentry kind="lib" path="stock-service/target/order-service-0.0.1-SNAPSHOT.jar"/>
+	<classpathentry kind="output" path="stock-service/target/classes"/>
+</classpath>
