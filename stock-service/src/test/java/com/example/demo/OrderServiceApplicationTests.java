@@ -45,11 +45,10 @@ class OrderServiceApplicationTests extends AbstractTest {
      void createStock() throws Exception{
 		String uri="http://localhost:8010/stock-product-api/stock";
 		Stock s= new Stock();
-		s.setSupplierId((long) 203);
+		s.setSupplierId((long) 905);
 		s.setQty(100);
 		s.setSupplierContact("9999");
-		s.setSupplierId((long) 103);
-		s.setSupplierName("Motrola");
+		s.setSupplierName("Testman");
 		s.setValid("yes");
 		
 		String inputJson=super.mapToJson(s);
@@ -68,9 +67,9 @@ class OrderServiceApplicationTests extends AbstractTest {
 	
 	@Test
     void updateStock() throws Exception{
-		String uri="http://localhost:8010/stock-product-api/stock/300";
+		String uri="http://localhost:8010/stock-product-api/stock/900";
 		Stock s= new Stock();
-		s.setSupplierId((long) 300);
+		s.setSupplierId((long)900);
 		s.setQty(50);
 		s.setSupplierContact("000");
 		s.setSupplierName("Lenovo");
@@ -92,7 +91,7 @@ class OrderServiceApplicationTests extends AbstractTest {
 	
 	@Test
     void deleteStock() throws Exception{
-		String uri="http://localhost:8010/stock-product-api/stock/400";
+		String uri="http://localhost:8010/stock-product-api/stock/902";
 		
 		MvcResult mvcResult= mock.perform(MockMvcRequestBuilders.delete(uri)).andReturn();
 		

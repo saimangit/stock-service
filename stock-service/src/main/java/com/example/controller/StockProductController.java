@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.example.dto.StockDTO;
 import com.example.exception.StockNotFoundException;
 
 import com.example.model.Stock;
@@ -40,13 +40,15 @@ public class StockProductController {
 	}
 
 	@PostMapping(value = "/stock", produces = "application/json")
-	public ResponseEntity<String> insertNewStock(@Valid @RequestBody Stock stock) {
-
+	public ResponseEntity<String> insertNewStock(@Valid @RequestBody StockDTO stock) {
+		
 		return stockProductService.addStock(stock);
 	}
 
+	
+
 	@PutMapping(value = "/stock/{sid}", produces = "application/json")
-	public Stock updateNewStock(@PathVariable("sid") String sid, @Valid @RequestBody Stock stock)
+	public Stock updateNewStock(@PathVariable("sid") String sid, @Valid @RequestBody StockDTO stock)
 			throws StockNotFoundException {
 
 		return stockProductService.updateStock(sid, stock);
@@ -54,7 +56,7 @@ public class StockProductController {
 	}
 
 	@DeleteMapping(value = "/stock/{sid}", produces = "application/json")
-	public ResponseEntity<?> deleteNewStock(@PathVariable("sid") String sid) {
+	public ResponseEntity<Object> deleteNewStock(@PathVariable("sid") String sid) {
 
 		return stockProductService.deleteStock(sid);
 

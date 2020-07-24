@@ -16,7 +16,7 @@ public class GlobalExceptionHandler {
 	
 	
 	@ExceptionHandler(ProductNotFoundException.class)
-	public ResponseEntity<?> productNotFoundException(ProductNotFoundException ex, WebRequest request){
+	public ResponseEntity<ErrorDetails> productNotFoundException(ProductNotFoundException ex, WebRequest request){
 		ErrorDetails error= 
 				new ErrorDetails(new Date(),ex.getMessage(),request.getDescription(false));
 		
@@ -24,7 +24,7 @@ public class GlobalExceptionHandler {
 	}
 	
 	@ExceptionHandler(StockNotFoundException.class)
-	public ResponseEntity<?> stockNotFoundException(StockNotFoundException ex, WebRequest request){
+	public ResponseEntity<ErrorDetails> stockNotFoundException(StockNotFoundException ex, WebRequest request){
 		ErrorDetails error= 
 				new ErrorDetails(new Date(),ex.getMessage(),request.getDescription(false));
 		
@@ -32,7 +32,7 @@ public class GlobalExceptionHandler {
 	}
    
 	@ExceptionHandler(Exception.class)
-	public ResponseEntity<?> gobalExceptionHandler(Exception ex, WebRequest request){
+	public ResponseEntity<ErrorDetails> gobalExceptionHandler(Exception ex, WebRequest request){
 		ErrorDetails error= 
 				new ErrorDetails(new Date(),ex.getMessage(),request.getDescription(false));
 		

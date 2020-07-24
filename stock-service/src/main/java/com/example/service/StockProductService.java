@@ -2,11 +2,14 @@ package com.example.service;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.example.dto.StockDTO;
 import com.example.exception.ProductNotFoundException;
 import com.example.exception.StockNotFoundException;
 import com.example.model.Stock;
@@ -26,22 +29,37 @@ public class StockProductService {
 		return stockRepository.findAll();
 	}
 
-	public ResponseEntity<String> addStock(Stock stock) {
-		stockRepository.save(stock);
+	public ResponseEntity<String> addStock(StockDTO stock) {
+		
+		Stock s=objectMapping(stock);
+		
+		
+		stockRepository.save(s);
 		return new ResponseEntity<>("Stocks got created", HttpStatus.CREATED);
 	}
 
-	public Stock updateStock(String sid, Stock stock) throws StockNotFoundException {
+	public Stock objectMapping(StockDTO stock) {
+		Stock s= new Stock();
+		s.setSupplierId(stock.getSupplierId());
+		s.setQty(stock.getQty());
+		s.setSupplierContact(stock.getSupplierContact());
+		s.setSupplierName(stock.getSupplierName());
+		s.setValid(stock.getValid());
+		return s;
+	}
+	public Stock updateStock(String sid, @Valid StockDTO stock) throws StockNotFoundException {
 
 		if (!stockRepository.existsById((long) Integer.parseInt(sid))) {
 			throw new StockNotFoundException("product not found for the pid: " + sid);
 		}
 
+		Stock  entity = objectMapping(stock);
+		
 		return stockRepository.findById((long) Integer.parseInt(sid)).map(s -> {
-			s.setQty(stock.getQty());
-			s.setSupplierContact(stock.getSupplierContact());
-			s.setSupplierName(stock.getSupplierName());
-			s.setValid(stock.getValid());
+			s.setQty(entity.getQty());
+			s.setSupplierContact(entity.getSupplierContact());
+			s.setSupplierName(entity.getSupplierName());
+			s.setValid(entity.getValid());
 			return stockRepository.save(s);
 		}).orElseThrow(() -> new StockNotFoundException("stock not found for the pid: " + sid));
 	}

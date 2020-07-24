@@ -1,60 +1,40 @@
-package com.example.model;
+package com.example.dto;
 
-import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Entity
-@Table(name="product")
-public class StockProducts implements Serializable{
+
+public class StockProductsDTO {
       
-	  /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	@Id
-      @GeneratedValue(strategy = GenerationType.IDENTITY)
-	  @Column(name="pid",nullable = false)	
+
+	
 	  private Long pid;
+	  @NotBlank(message="product name must not be null")
 	  
-	  @Column(name="product_name",nullable = false)
 	  private String productName;
-	  @Column(name="list_price",nullable = false) 
 	  private int listPrice;
-	  @Column(name="discount",nullable = false)   
 	  private int discount;
-	  
-	  @Column(name="created_user",nullable = false) 
+	  @NotBlank(message="createdUser must not be null")
 	  private String createdUser;
-	  
-	  @Column(name="created_date",nullable = false)   
+	  @NotBlank(message="createdDate must not be null")
+	 
 	  private String createdDate;
 	  
-	  @ManyToOne(fetch = FetchType.EAGER)
+	 
 	  @JsonIgnore
-	  @JoinColumn(name = "supplier_id",referencedColumnName = "supplier_id")
-	  private Stock stock;
+	  private StockDTO stock;
 	  
 	  
 	  
-	public StockProducts() {
+	public StockProductsDTO() {
 		super();
 	}
-	public Stock getStock() {
+	public StockDTO getStock() {
 		return stock;
 	}
-	public void setStock(Stock stock) {
+	public void setStock(StockDTO stock) {
 		this.stock = stock;
 		stock.getStockProducts().add(this);
 	}
