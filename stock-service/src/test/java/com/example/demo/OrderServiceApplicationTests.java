@@ -113,7 +113,6 @@ class OrderServiceApplicationTests extends AbstractTest {
 		assertEquals(200, status);
 	
 	}
-	
-	
+
 	
 }
