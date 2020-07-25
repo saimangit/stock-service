@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -24,8 +25,6 @@ import com.example.model.Stock;
 
 import com.example.service.StockProductService;
 
-
-
 @RestController
 @RequestMapping(value = "/stock-product-api")
 public class StockProductController {
@@ -35,17 +34,22 @@ public class StockProductController {
 
 	@GetMapping(value = "/stock", produces = "application/json")
 	public List<Stock> getNewAllStock() {
-		return stockProductService.getStock();
+		return stockProductService.getAllStock();
+
+	}
+
+	@GetMapping(value = "/stock/{sid}", produces = "application/json")
+	public Optional<Stock> getStockBySid(@PathVariable("sid") String sid) throws StockNotFoundException {
+
+		return stockProductService.getStockBySid(sid);
 
 	}
 
 	@PostMapping(value = "/stock", produces = "application/json")
 	public ResponseEntity<String> insertNewStock(@Valid @RequestBody StockDTO stock) {
-		
+
 		return stockProductService.addStock(stock);
 	}
-
-	
 
 	@PutMapping(value = "/stock/{sid}", produces = "application/json")
 	public Stock updateNewStock(@PathVariable("sid") String sid, @Valid @RequestBody StockDTO stock)

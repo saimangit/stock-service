@@ -1,6 +1,7 @@
 package com.example.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -25,8 +26,23 @@ public class StockProductService {
 	@Autowired
 	ProductRepository productRepository;
 
-	public List<Stock> getStock() {
+	
+	private static final String EXCEPTION_MESSAGE = "product not found for the pid: ";
+	
+	
+	public List<Stock> getAllStock() {
 		return stockRepository.findAll();
+	}
+	
+	public Optional<Stock> getStockBySid(String sid) throws StockNotFoundException {
+		
+		int s=Integer.parseInt(sid);
+		
+		if (!stockRepository.existsById((long)s )) {
+	      throw new StockNotFoundException(EXCEPTION_MESSAGE + sid);
+		}	
+		
+		return stockRepository.findById((long)s);
 	}
 
 	public ResponseEntity<String> addStock(StockDTO stock) {
@@ -50,7 +66,7 @@ public class StockProductService {
 	public Stock updateStock(String sid, @Valid StockDTO stock) throws StockNotFoundException {
 
 		if (!stockRepository.existsById((long) Integer.parseInt(sid))) {
-			throw new StockNotFoundException("product not found for the pid: " + sid);
+			throw new StockNotFoundException(EXCEPTION_MESSAGE + sid);
 		}
 
 		Stock  entity = objectMapping(stock);
@@ -68,7 +84,9 @@ public class StockProductService {
 		return stockRepository.findById((long) Integer.parseInt(sid)).map(p -> {
 			stockRepository.delete(p);
 			return ResponseEntity.ok().build();
-		}).orElseThrow(() -> new ProductNotFoundException("product not found for the pid: " + sid));
+		}).orElseThrow(() -> new ProductNotFoundException(EXCEPTION_MESSAGE + sid));
 	}
+
+
 
 }
