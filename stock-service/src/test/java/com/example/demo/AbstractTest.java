@@ -15,15 +15,15 @@ import org.springframework.test.web.servlet.MockMvcBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.example.controller.StockProductController;
+import com.example.controller.StockController;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes=OrderServiceApplication.class)
-@ContextConfiguration(classes = StockProductController.class)
+@SpringBootTest(classes=StockServiceApplication.class)
+@ContextConfiguration(classes = StockController.class)
 @WebAppConfiguration
 class AbstractTest {
 

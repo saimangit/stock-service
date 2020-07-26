@@ -18,7 +18,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.sun.jersey.core.header.MediaTypes;
 
 //@SpringBootTest
-class OrderServiceApplicationTests extends AbstractTest {
+class StockServiceApplicationTests extends AbstractTest {
 
 	
     @Override
@@ -43,7 +43,7 @@ class OrderServiceApplicationTests extends AbstractTest {
   
 	@Test
     void getOneStock() throws Exception{
-		String uri="http://localhost:8010/stock-product-api/stock/500";
+		String uri="http://localhost:8010/stock-product-api/stock/400";
 		MvcResult mvcResult= mock.perform(MockMvcRequestBuilders.get(uri).
 				accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
 		
@@ -69,8 +69,8 @@ class OrderServiceApplicationTests extends AbstractTest {
 	public String getStockJson() throws JsonProcessingException {
 	
 		Stock s= new Stock();
-		s.setSupplierId((long) 910);
-		s.setQty(40);
+		s.setSupplierId((long) 602);
+		s.setQty(60);
 		s.setSupplierContact("55656");
 		s.setSupplierName("saiman");
 		s.setValid("yes");
@@ -84,9 +84,9 @@ class OrderServiceApplicationTests extends AbstractTest {
 		String uri="http://localhost:8010/stock-product-api/stock/905";
 		Stock s= new Stock();
 		s.setSupplierId((long)905);
-		s.setQty(50);
-		s.setSupplierContact("000");
-		s.setSupplierName("Samsung");
+		s.setQty(20);
+		s.setSupplierContact("949449");
+		s.setSupplierName("samsung");
 		s.setValid("yes");
 		
 		String inputJson=super.mapToJson(s);
@@ -105,7 +105,7 @@ class OrderServiceApplicationTests extends AbstractTest {
 	
 	@Test
     void deleteStock() throws Exception{
-		String uri="http://localhost:8010/stock-product-api/stock/403";
+		String uri="http://localhost:8010/stock-product-api/stock/404";
 		
 		MvcResult mvcResult= mock.perform(MockMvcRequestBuilders.delete(uri)).andReturn();
 		

@@ -13,7 +13,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>order-service</name>
 	<packaging>jar</packaging>
-	<description>Demo project for Spring Boot</description>
+	<description>Order service application</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -105,6 +105,7 @@
 </executions>
 </plugin>
 		</plugins>
+		<finalName>stock-service-api</finalName>
 	</build>
 
 	<dependencyManagement>

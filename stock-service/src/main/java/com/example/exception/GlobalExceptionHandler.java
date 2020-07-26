@@ -15,14 +15,6 @@ public class GlobalExceptionHandler {
 	
 	
 	
-	@ExceptionHandler(ProductNotFoundException.class)
-	public ResponseEntity<ErrorDetails> productNotFoundException(ProductNotFoundException ex, WebRequest request){
-		ErrorDetails error= 
-				new ErrorDetails(new Date(),ex.getMessage(),request.getDescription(false));
-		
-		return new ResponseEntity<>(error,HttpStatus.NOT_FOUND);
-	}
-	
 	@ExceptionHandler(StockNotFoundException.class)
 	public ResponseEntity<ErrorDetails> stockNotFoundException(StockNotFoundException ex, WebRequest request){
 		ErrorDetails error= 

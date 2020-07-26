@@ -11,23 +11,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.example.dto.StockDTO;
-import com.example.exception.ProductNotFoundException;
 import com.example.exception.StockNotFoundException;
 import com.example.model.Stock;
-import com.example.repository.ProductRepository;
 import com.example.repository.StockRepository;
 
 @Service
-public class StockProductService {
+public class StockService {
 
 	@Autowired
 	StockRepository stockRepository;
-
-	@Autowired
-	ProductRepository productRepository;
-
 	
-	private static final String EXCEPTION_MESSAGE = "product not found for the pid: ";
+	private static final String EXCEPTION_MESSAGE = "stock not found for the sid: ";
 	
 	
 	public List<Stock> getAllStock() {
@@ -80,11 +74,11 @@ public class StockProductService {
 		}).orElseThrow(() -> new StockNotFoundException("stock not found for the pid: " + sid));
 	}
 
-	public ResponseEntity<Object> deleteStock(String sid) {
+	public ResponseEntity<Object> deleteStock(String sid) throws  StockNotFoundException {
 		return stockRepository.findById((long) Integer.parseInt(sid)).map(p -> {
 			stockRepository.delete(p);
 			return ResponseEntity.ok().build();
-		}).orElseThrow(() -> new ProductNotFoundException(EXCEPTION_MESSAGE + sid));
+		}).orElseThrow(() -> new StockNotFoundException(EXCEPTION_MESSAGE + sid));
 	}
 
 

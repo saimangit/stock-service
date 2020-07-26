@@ -7,8 +7,5 @@ import com.example.model.Stock;
 
 public interface StockRepository extends JpaRepository<Stock, Long> {
 
-	
-
-	
 
 }

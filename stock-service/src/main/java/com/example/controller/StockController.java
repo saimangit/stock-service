@@ -23,14 +23,14 @@ import com.example.exception.StockNotFoundException;
 
 import com.example.model.Stock;
 
-import com.example.service.StockProductService;
+import com.example.service.StockService;
 
 @RestController
 @RequestMapping(value = "/stock-product-api")
-public class StockProductController {
+public class StockController {
 
 	@Autowired
-	StockProductService stockProductService;
+	StockService stockProductService;
 
 	@GetMapping(value = "/stock", produces = "application/json")
 	public List<Stock> getNewAllStock() {
@@ -60,7 +60,7 @@ public class StockProductController {
 	}
 
 	@DeleteMapping(value = "/stock/{sid}", produces = "application/json")
-	public ResponseEntity<Object> deleteNewStock(@PathVariable("sid") String sid) {
+	public ResponseEntity<Object> deleteNewStock(@PathVariable("sid") String sid) throws StockNotFoundException {
 
 		return stockProductService.deleteStock(sid);
 
